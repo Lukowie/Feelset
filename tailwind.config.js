@@ -14,6 +14,7 @@ module.exports = {
         'violet': '#635775',
         'brown-black': '#2D2725',
         'peach': '#F4C095',
+        'vermillion': '#FF7070',
       },
       fontFamily: {
         'Arial': 'Arial',

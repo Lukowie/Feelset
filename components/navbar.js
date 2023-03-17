@@ -1,8 +1,8 @@
 export default function NavBar() {
 
     return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
-    <div className="container md:grid md:grid-cols-3 flex-wrap items-center mx-auto my-2">
+    <nav className="bg-white border-b px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+    <div className="container md:grid md:grid-cols-3 flex-wrap items-center mx-auto my-2 ">
       <a href="/" className="col-span-1 flex items-center mx-auto md:mx-0">
       <span className='mx-auto md:mx-0 border-4 px-3 py-2 font-Arial font-extrabold text-2xl italic'>FEELSET</span>
       </a>
