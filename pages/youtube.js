@@ -4,8 +4,8 @@ import Head from '../components/Head';
 import Title from '../components/Title';
 import { getVideos } from '../components/youtubeHandler';
 
-export default function Youtube(){
-    console.log(getVideos());
+export default async function Youtube(){
+    getVideos();
     return (
         <div className='min-h-screen min-w-screen bg-gray-800 text-gray-300'>
         <Head />
