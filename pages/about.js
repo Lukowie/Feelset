@@ -11,7 +11,7 @@ export default function About(){
             <div className='flex items-center'>
                 <Title title="About" />
             </div>
-            <div className='font-mono leading-8 text-lg w-11/12 lg:w-6/12 mx-auto mt-10'>
+            <div className='leading-8 text-lg w-11/12 lg:w-6/12 mx-auto mt-10'>
                 <p>On January 28th, 2017 <span className="text-purple-400">feelset</span> was born. At the time, it's purpose was to give me something to work on consistently and to help me through a hard time.</p>
                 <br/>
                 <p>Through comments I found that the music I promoted helped more than just myself. Many viewers found that the music helped them through tough times. While it's not the music I produced, I felt good knowing I was expanding the listening pool of these artists.</p>

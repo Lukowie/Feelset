@@ -12,7 +12,7 @@ module.exports = {
         'viridian': '#679289',
         'onyx': '#354f52',
         'violet': '#635775',
-        'brown-black': '#2D2725',
+        'second-blue': '#0E1428',
         'peach': '#F4C095',
         'vermillion': '#FF7070',
       },
