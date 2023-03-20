@@ -3,7 +3,7 @@ const YOUTUBE_LATEST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/search';
 export default async (req, res) => {
     try {
         var key = process.env.YOUTUBE_API_KEY;
-        const response = await fetch(`${YOUTUBE_LATEST_ITEMS_API}?part=snippet&channelId=UCWpFY9bOMeqpaS1He4w1IcQ&maxResults=5&order=date&type=video&key=${key}`);
+        const response = await fetch(`${YOUTUBE_LATEST_ITEMS_API}?part=snippet&channelId=UCWpFY9bOMeqpaS1He4w1IcQ&maxResults=6&order=date&type=video&key=${key}`);
         const data = await response.json();
 
         let videoIds = {ids:[]};

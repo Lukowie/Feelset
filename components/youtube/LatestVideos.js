@@ -7,7 +7,7 @@ const LatestVideos = () => {
 
     let videos = [];
     if(data?.hasOwnProperty('ErrorCode')){
-        let tempArr = new Array(1,2,3,4,5);
+        let tempArr = new Array(1,2,3,4,5,6);
         videos = tempArr.map((videoId) =>    
             <div key={'vidSkele'+videoId} className='md:col'>
                 <div className="relative aspect-video overflow-hidden mb-4 md:mb-4 lg:md-2">
@@ -29,7 +29,7 @@ const LatestVideos = () => {
     }
     return (
         <div>
-            <div className='flex-grid lg:grid items-center md:gap-4 md:grid-cols-2 lg:grid-cols-2'>
+            <div className='flex-grid mt-10 lg:grid items-center md:gap-4 md:grid-cols-2 lg:grid-cols-2'>
                 {videos}
             </div>
         </div>
