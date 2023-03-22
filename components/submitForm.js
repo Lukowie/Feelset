@@ -7,6 +7,12 @@ export default function Form() {
         //Gathering data from form
         const data = {
             artistName: e.target.artistName.value,
+            linktree: e.target.linktree.value,
+            soundcloud: e.target.soundcloud.value,
+            spotify: e.target.spotify.value,
+            twitter: e.target.twitter.value,
+            instagram: e.target.instagram.value,
+            musicfile: e.target.musicfile.files[0],
         }
 
         const JSONdata = JSON.stringify(data);
@@ -25,7 +31,6 @@ export default function Form() {
 
         const result = await response.json();
 
-        alert(`${result.data.artistName}`);
     }
 
 
@@ -37,20 +42,21 @@ export default function Form() {
                         <div className="mb-3">
                             <label htmlFor="artistName">Artist Name</label>
                         </div>
-                        <input className="px-2 text-black p-1 w-80 rounded-lg" type="text" id="artistName" placeholder="feelset" name="artistName" required />
+                        <input className="px-2 text-black p-1 px-5 w-80 rounded-lg" type="text" id="artistName" placeholder="feelset" name="artistName" required />
                         <br />
                     </div>
                     <div className="text-center mb-3">
                         <label htmlFor="description">Description</label>
                     </div>
                     <div className="mx-auto">
-                    <div className="flex flex-wrap mr-5 ml-5 space-y-5 md:space-y-0 md:grid md:grid-cols-2 md:gap-4 md:content-evenly">
-                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="linktree" placeholder="https://linktr.ee/[name]" name="linktree" />
-                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="soundcloud" placeholder="https://soundcloud.com/feelset" name="soundcloud" />
-                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="spotify" placeholder="https://open.spotify.com/user/[id]" name="spotify" />
-                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="twitter" placeholder="https://twitter.com/feelset" name="twitter" />
-                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="instagram" placeholder="https://www.instagram.com/feelset" name="instagram" />
-                    </div>
+                        <div className="flex flex-wrap mr-5 ml-5 space-y-5 md:space-y-0 md:grid md:grid-cols-2 md:gap-4 md:content-evenly">
+                            <input className="w-full text-black p-1 px-5 rounded-lg" type="text" id="linktree" placeholder="https://linktr.ee/[name]" name="linktree" />
+                            <input className="w-full text-black p-1 px-5 rounded-lg" type="text" id="soundcloud" placeholder="https://soundcloud.com/feelset" name="soundcloud" />
+                            <input className="w-full text-black p-1 px-5 rounded-lg" type="text" id="spotify" placeholder="https://open.spotify.com/user/[id]" name="spotify" />
+                            <input className="w-full text-black p-1 px-5 rounded-lg" type="text" id="twitter" placeholder="https://twitter.com/feelset" name="twitter" />
+                            <input className="w-full text-black p-1 px-5 rounded-lg" type="text" id="instagram" placeholder="https://www.instagram.com/feelset" name="instagram" />
+                        </div>
+                        <input type="file" id="musicfile" name="musicfile" ></input>
                     </div>
                 </div>
                 <div className="leading-8 text-lg text-center mt-5">
