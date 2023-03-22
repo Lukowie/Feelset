@@ -37,7 +37,7 @@ export default function Form() {
                         <div className="mb-3">
                             <label htmlFor="artistName">Artist Name</label>
                         </div>
-                        <input className="text-black p-1 w-80 rounded-lg" type="text" id="artistName" placeholder="feelset" name="artistName" required />
+                        <input className="px-2 text-black p-1 w-80 rounded-lg" type="text" id="artistName" placeholder="feelset" name="artistName" required />
                         <br />
                     </div>
                     <div className="text-center mb-3">
@@ -45,11 +45,11 @@ export default function Form() {
                     </div>
                     <div className="mx-auto">
                     <div className="flex flex-wrap mr-5 ml-5 space-y-5 md:space-y-0 md:grid md:grid-cols-2 md:gap-4 md:content-evenly">
-                        <input className="w-full text-black p-1 rounded-lg" type="text" id="linktree" placeholder="https://linktr.ee/[name]" name="linktree" />
-                        <input className="w-full text-black p-1 rounded-lg" type="text" id="soundcloud" placeholder="https://soundcloud.com/feelset" name="soundcloud" />
-                        <input className="w-full text-black p-1 rounded-lg" type="text" id="spotify" placeholder="https://open.spotify.com/user/[id]" name="spotify" />
-                        <input className="w-full text-black p-1 rounded-lg" type="text" id="twitter" placeholder="https://twitter.com/feelset" name="twitter" />
-                        <input className="w-full text-black p-1 rounded-lg" type="text" id="instagram" placeholder="https://www.instagram.com/feelset" name="instagram" />
+                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="linktree" placeholder="https://linktr.ee/[name]" name="linktree" />
+                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="soundcloud" placeholder="https://soundcloud.com/feelset" name="soundcloud" />
+                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="spotify" placeholder="https://open.spotify.com/user/[id]" name="spotify" />
+                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="twitter" placeholder="https://twitter.com/feelset" name="twitter" />
+                        <input className="w-full text-black p-1 px-2 rounded-lg" type="text" id="instagram" placeholder="https://www.instagram.com/feelset" name="instagram" />
                     </div>
                     </div>
                 </div>
