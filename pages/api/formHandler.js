@@ -10,7 +10,7 @@ export default function formHandler(req, res) {
                 spotify: body.spotify,
                 twitter: body.twitter,
                 instagram: body.instagram,
-                musicfile: body.musicfile,
+                songName: body.songName,
             }
         }
     );

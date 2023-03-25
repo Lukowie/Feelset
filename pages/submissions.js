@@ -2,8 +2,6 @@ import {React} from 'react';
 import NavBar from '../components/navbar';
 import Head from '../components/Head';
 import Title from '../components/Title';
-import YoutubeStatCards from '../components/youtube/YoutubeStatCards';
-import LatestVideos from '../components/youtube/latestVideos';
 import Footer from '../components/footer';
 import Form from '../components/submitForm';
 

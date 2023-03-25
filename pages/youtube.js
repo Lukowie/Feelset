@@ -3,7 +3,7 @@ import NavBar from '../components/navbar';
 import Head from '../components/Head';
 import Title from '../components/Title';
 import YoutubeStatCards from '../components/youtube/YoutubeStatCards';
-import LatestVideos from '../components/youtube/latestVideos';
+import LatestVideos from '../components/youtube/LatestVideos';
 import Footer from '../components/footer';
 
 export default function Youtube(){
