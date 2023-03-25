@@ -4,13 +4,6 @@ import testRegex from './formValidation';
 
 export default function Form() {
 
-    // input validation states
-    const [linktreeLink, setLinktreeLink] = useState("");
-    const [spotifyLink, setSpotifyLink] = useState("");
-    const [soundcloudLink, setSoundCloudLink] = useState("");
-    const [instagramLink, setInstagramLink] = useState("");
-    const [twitterLink, setTwitterLink] = useState("");
-
     const [links, setLinks] = useState({
         linktree: '',
         spotify: '',
@@ -19,6 +12,7 @@ export default function Form() {
         twitter: '',
       });
 
+      // need to understand this better
     const handleChange = (e) => {
         const { id, value } = e.target;
         setLinks((prevState) => ({
@@ -26,20 +20,6 @@ export default function Form() {
           [id]: value,
         }));
       };
-/*            
-        const name = e.target.id;
-        if (name == 'linktree'){
-            setLinktreeLink(e.target.value);
-        } else if (name == 'spotify'){
-            setSpotifyLink(e.target.value);
-        } else if (name == 'soundcloud'){
-            setSoundCloudLink(e.target.value);
-        } else if (name == 'instagram'){
-            setInstagramLink(e.target.value);
-        } else if (name == 'twitter'){
-            setTwitterLink(e.target.value);
-        }*/
-    }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
