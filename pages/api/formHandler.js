@@ -11,6 +11,7 @@ export default function formHandler(req, res) {
                 twitter: body.twitter,
                 instagram: body.instagram,
                 songName: body.songName,
+                songPath: body.songPath,
             }
         }
     );

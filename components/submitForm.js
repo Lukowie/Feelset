@@ -1,4 +1,3 @@
-import { render } from "react-dom";
 import { useState } from "react";
 import axios from 'axios';
 
@@ -10,6 +9,9 @@ export default function Form() {
 
         //stop form from submitting and refreshing page
         e.preventDefault();
+
+        let songName = "";
+        let songPath = "";
         
         const formData = new FormData();
         formData.append('musicfile', e.target.musicfile.files[0]);
@@ -18,42 +20,48 @@ export default function Form() {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
-        }).then((response)=>{
-            console.log("response: " + response.message);
+        }).then((response) => {
+            console.log("response: " + JSON.stringify(response.data.message));
+            //if(response.data.status === "200"){
+                songName = response.data.songName;
+                songPath = response.data.songPath;
+                sendDataToDB(e.target, songName, songPath);
+            //}
         }).catch((err) => {
             console.log(err);
         });
-
-        //Gathering data from form
-        const data = {
-            artistName: e.target.artistName.value,
-            linktree: e.target.linktree.value,
-            soundcloud: e.target.soundcloud.value,
-            spotify: e.target.spotify.value,
-            twitter: e.target.twitter.value,
-            instagram: e.target.instagram.value,
-            songName: e.target.musicfile.files[0].name,
-        }
-        
-        //send file to fsMusic to be put to filesystem
-        const JSONdata = JSON.stringify(data);
-        const endpoint = '/api/formHandler';
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSONdata,
-        }
-
-        //send to formhandler to get processed by the mysql db
-        const response = await fetch(endpoint, options);
-        const result = await response.json();
-        console.log(result);
     };
 
+const sendDataToDB = async (target, songName, songPath) => {
+     //Gathering data to be sent to db query
+     const data = {
+        artistName: target.artistName.value,
+        linktree: target.linktree.value,
+        soundcloud: target.soundcloud.value,
+        spotify: target.spotify.value,
+        twitter: target.twitter.value,
+        instagram: target.instagram.value,
+        songName: songName,
+        songPath: songPath,
+    }
+    
+    //send file to fsMusic to be put to filesystem
+    const JSONdata = JSON.stringify(data);
+    const endpoint = '/api/formHandler';
 
+    await axios.post("/api/formHandler", JSONdata, {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then((response) => {
+        console.log("response: " + JSON.stringify(response.data));
+        if(response.status === "200"){
+           
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+}
     return (
         <div className=''>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
