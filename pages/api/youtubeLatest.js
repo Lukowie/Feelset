@@ -1,4 +1,5 @@
 const YOUTUBE_LATEST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/search';
+import { toastContainer, toast } from "react-toastify";
 
 export default async (req, res) => {
     try {
@@ -15,6 +16,16 @@ export default async (req, res) => {
             videoIds
         })
     } catch (error){
+        toast.error(`API Limit Reached. Come back later.` , {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        })
         return res.status(500).json({
             'ErrorCode': 'API Limit Reached',
         })

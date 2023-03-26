@@ -1,24 +1,36 @@
+import { toast } from "react-toastify";
+
 export default function testRegex (links) {
     let errorMessages = [];
     let testArr = [];
 
-    validateSpotifyLink(links.linktree, testArr);
     validateLinktreeLink(links.spotify, testArr);
     validateSoundcloudLink(links.soundcloud, testArr);
-    validateInstagramLink(links.instagram, testArr);
+    validateSpotifyLink(links.linktree, testArr);
     validateTwitterLink(links.twitter, testArr);
+    validateInstagramLink(links.instagram, testArr);
     
     for(let i =0; i <testArr.length; i++){
         let item = testArr[i];
         console.log(item.result);
         if (item.result == 'false'){
             errorMessages.push(item.name);
+            toast(`Please match the format of the ${item.name} link and try again.` , {
+                position: "top-center",
+                autoClose: 10000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
         }
     };
 
     if(errorMessages.length > 0){
-        let messages = errorMessages.join('\n');
-        alert(`For the social links: \n${messages} \nPlease check the link(s) and try again.`)
+        let messages = errorMessages.join(', ');
+        
 
         return false;
     } else {
