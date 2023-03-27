@@ -27,15 +27,6 @@ export default function testRegex (links) {
             });
         }
     };
-
-    if(errorMessages.length > 0){
-        let messages = errorMessages.join(', ');
-        
-
-        return false;
-    } else {
-        return true;
-    }
 }
 
 function validateSpotifyLink(spotifyLink, testArr){

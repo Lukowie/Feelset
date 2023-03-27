@@ -3,7 +3,6 @@ import axios from 'axios';
 import testRegex from './formValidation';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import bg from '../pages/api/uploads/bg.jpg';
 
 export default function Form() {
 
