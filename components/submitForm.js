@@ -25,20 +25,20 @@ export default function Form() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-            //stop form from submitting and refreshing page
+
+        //stop form from submitting and refreshing page if inputs are not valid
         if (testRegex(links)){
-            
-            let songPath = "";
-            
             const formData = new FormData();
             formData.append('musicfile', e.target.musicfile.files[0]);
 
+
+            // send data to filsystem
             await axios.post("/api/fsMusic", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }
             }).then((response) => {
-                    songPath = response.data.songPath;
+                    let songPath = response.data.songPath;
                     toast.success("Uploaded Song to Server", {
                         position: "top-center",
                         autoClose: 5000,
@@ -49,6 +49,7 @@ export default function Form() {
                         progress: undefined,
                         theme: "dark",
                     });
+                    // send data to database
                     sendDataToDB(e.target, songPath);
             }).catch((err) => {
                 toast("Error Uploading File: " + err, {
@@ -65,6 +66,7 @@ export default function Form() {
         }
     };
 
+    // axios/ fetch to send inputs/data to database
 const sendDataToDB = async (target, songPath) => {
      //Gathering data to be sent to db query
      const data = {
@@ -78,7 +80,6 @@ const sendDataToDB = async (target, songPath) => {
         songPath: songPath,
     }
     
-    //send file to fsMusic to be put to filesystem
     const JSONdata = JSON.stringify(data);
 
     await axios.post("/api/formHandler", JSONdata, {
@@ -86,7 +87,7 @@ const sendDataToDB = async (target, songPath) => {
             "Content-Type": "application/json",
         }
     }).then((response) => {
-        console.log("response: " + JSON.stringify(response.data));
+        //console.log("response: " + JSON.stringify(response.data));
             toast.success("Data inserted into database", {
                 position: "top-center",
                 autoClose: 5000,
@@ -115,7 +116,7 @@ const sendDataToDB = async (target, songPath) => {
         <div className=''>
             <ToastContainer />
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className="leading-8 text-lg w-11/12 lg:w-8/12 xl:w-7/12 2xl:w-4/12 mx-auto mt-10 bg-gray-700 pt-5 pb-5 rounded-lg">
+                <div className="text-lg w-11/12 lg:w-8/12 xl:w-7/12 2xl:w-4/12 mx-auto mt-5 bg-gray-700 pt-5 pb-5 rounded-lg">
                     <div className="col text-center mx-auto mb-5">
                         <div className="mb-2">
                             <label htmlFor="artistName">Artist Name</label>
@@ -150,7 +151,7 @@ const sendDataToDB = async (target, songPath) => {
                                                     file:font-semibold
                                                     file:bg-blue-700 file:text-white
                                                     hover:file:bg-blue-900"
-                                id="musicfile" name="musicfile" type="file" accept=".mp3,.wav" required>
+                                id="musicfile" name="musicfile" type="file" required>
                                 </input>
                             </div>
                         </div>

@@ -10,7 +10,7 @@ export default function Submissions(){
         <div className='min-h-screen min-w-screen bg-gray-800 text-gray-300'>
         <Head />
         <NavBar />
-            <div className='flex items-center'>
+            <div className='hidden sm:block'>
                 <Title title="Submit Your Music" />
             </div>
                 <Form />

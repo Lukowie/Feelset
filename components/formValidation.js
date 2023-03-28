@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 export default function testRegex (links) {
     let errorMessages = [];
     let testArr = [];
+    let flag = 0;
 
     validateLinktreeLink(links.spotify, testArr);
     validateSoundcloudLink(links.soundcloud, testArr);
@@ -12,7 +13,6 @@ export default function testRegex (links) {
     
     for(let i =0; i <testArr.length; i++){
         let item = testArr[i];
-        console.log(item.result);
         if (item.result == 'false'){
             errorMessages.push(item.name);
             toast(`Please match the format of the ${item.name} link and try again.` , {
@@ -25,8 +25,15 @@ export default function testRegex (links) {
                 progress: undefined,
                 theme: "dark",
             });
+            flag = 1;
         }
     };
+
+    if(flag == 1){
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function validateSpotifyLink(spotifyLink, testArr){
