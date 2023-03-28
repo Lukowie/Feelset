@@ -150,7 +150,7 @@ const sendDataToDB = async (target, songPath) => {
                                                     file:font-semibold
                                                     file:bg-blue-700 file:text-white
                                                     hover:file:bg-blue-900"
-                                id="musicfile" name="musicfile" type="file" required>
+                                id="musicfile" name="musicfile" type="file" accept=".mp3,.wav" required>
                                 </input>
                             </div>
                         </div>

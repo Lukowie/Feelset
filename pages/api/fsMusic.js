@@ -1,8 +1,4 @@
 import formidable from 'formidable';
-//import path from 'path';
-//import fs from 'fs';
-
-const multer = require('multer');
 
 export const config = {
     api: {
