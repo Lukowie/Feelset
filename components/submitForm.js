@@ -63,6 +63,8 @@ export default function Form() {
                     theme: "dark",
                 });
             });
+
+            await axios.post('/api/processJob');//data.jobId);
         }
     };
 
