@@ -1,0 +1,3 @@
+open sftp://feelset:Lukowie1@192.168.10.17 -hostkey="ssh-ed25519 255 FG6SkZxI/ALq4NEizo/oaoh36Kmz5u0rSEpSaxUuiQ4="
+get -latest /home/feelset/Feelset/pages/api/uploads/* Z:\feelsetFromServer\Songs\%1%
+exit
