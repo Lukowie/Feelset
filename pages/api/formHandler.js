@@ -5,7 +5,7 @@ export default async function formHandler(req, res) {
 
     const todayNow = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-    const query = 'INSERT INTO submissions (ArtistName, Linktree, Soundcloud, Spotify, Instagram, Twitter, SongName, SongPath, DateSubmitted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    let query = 'INSERT INTO submissions (ArtistName, Linktree, Soundcloud, Spotify, Instagram, Twitter, SongName, SongPath, DateSubmitted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     const values = [body.artistName, body.linktree, body.soundcloud, body.spotify, body.instagram, body.twitter, body.songName, body.songPath, todayNow];
 
     const results = await executeQuery({query, values});
@@ -15,10 +15,11 @@ export default async function formHandler(req, res) {
     } else {
         console.log('Data inserted successfully!' + results);
     }
+
+
     res.status(200).json(
         {
-            data: 
-            {
+                id: results.insertId,
                 artistName: body.artistName,
                 linktree: body.linktree,
                 soundcloud: body.soundcloud,
@@ -27,7 +28,6 @@ export default async function formHandler(req, res) {
                 instagram: body.instagram,
                 songName: body.songName,
                 songPath: body.songPath,
-            }
         }
     );
 }

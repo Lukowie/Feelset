@@ -3,6 +3,7 @@ import axios from 'axios';
 import testRegex from './formValidation';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { isUndefined } from "swr/_internal";
 
 export default function Form() {
 
@@ -50,7 +51,12 @@ export default function Form() {
                         theme: "dark",
                     });
                     // send data to database
-                    sendDataToDB(e.target, songPath);
+                    (async() => {
+                        let id = await sendDataToDB(e.target, songPath);
+                        // process job
+                        // will start the process of discord bot module and job queue
+                        sendToProcessJob(e.target, songPath, id);
+                    })();
             }).catch((err) => {
                 toast("Error Uploading File: " + err, {
                     position: "top-center",
@@ -63,13 +69,35 @@ export default function Form() {
                     theme: "dark",
                 });
             });
-
-            await axios.post('/api/processJob');//data.jobId);
         }
     };
+    
+
+    const sendToProcessJob = async (target, songPath, ID) => {
+        const data = {
+            artistName: target.artistName.value,
+            linktree: target.linktree.value,
+            soundcloud: target.soundcloud.value,
+            spotify: target.spotify.value,
+            twitter: target.twitter.value,
+            instagram: target.instagram.value,
+            songName: target.songName.value,
+            songPath: songPath,
+            id: ID,
+        }
+        
+        const JSONdata = JSON.stringify(data);
+
+        await axios.post('/api/processJob', JSONdata, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+    }
 
     // axios/ fetch to send inputs/data to database
 const sendDataToDB = async (target, songPath) => {
+    let id = "";
      //Gathering data to be sent to db query
      const data = {
         artistName: target.artistName.value,
@@ -84,11 +112,13 @@ const sendDataToDB = async (target, songPath) => {
     
     const JSONdata = JSON.stringify(data);
 
-    await axios.post("/api/formHandler", JSONdata, {
+    try {
+    const response = await axios.post("/api/formHandler", JSONdata, {
         headers: {
             "Content-Type": "application/json",
         }
-    }).then((response) => {
+    });
+
         //console.log("response: " + JSON.stringify(response.data));
             toast.success("Data inserted into database", {
                 position: "top-center",
@@ -100,8 +130,11 @@ const sendDataToDB = async (target, songPath) => {
                 progress: undefined,
                 theme: "dark",
         });
-        
-    }).catch((err) => {
+
+        id = response.data.id;
+
+
+    }catch (err) {
         toast("Error with inserting into database: " + err, {
                 position: "top-center",
                 autoClose: 5000,
@@ -112,7 +145,8 @@ const sendDataToDB = async (target, songPath) => {
                 progress: undefined,
                 theme: "dark",
         });
-    });
+    }
+    return id;
 }
     return (
         <div className=''>

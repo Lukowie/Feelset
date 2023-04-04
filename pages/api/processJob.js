@@ -1,4 +1,3 @@
-const Queue = require('bull');
 import discordHandling from './discordBot/discordHandling';
 
 
@@ -6,11 +5,9 @@ const windowsComputerIpAddress = '<IP address of your Windows computer>';
 const windowsComputerUsername = '<username of your Windows computer>';
 const windowsComputerPassword = '<password of your Windows computer>';
 
-const jobQueue = new Queue('my-queue');
-
-const processJob = async (job) => {
+const processJob = async (job, data) => {
     // Send Discord message to approval user
-    discordHandling(job);
+    discordHandling(job, data);
     // ...
     // Execute PowerShell script on Windows computer
     // ...
@@ -22,19 +19,8 @@ const processJob = async (job) => {
 };
 
 export default async function handler(req, res) {
-    try {
-        const jobId = req.query.jobId;
-        console.log("hi");
-        const job = await jobQueue.getJob(jobId);
-        if (job === null) {
-            res.status(404).end();
-            return;
-        }
-        await processJob(job);
-        res.status(200).json({message: 'good'});
-    } catch (error) {
-        console.error(error);
-        res.status(500).end();
-    }
+    console.log(req.body);
+    await processJob(req.body.id, req.body);
+    res.status(200).end();
 }
 

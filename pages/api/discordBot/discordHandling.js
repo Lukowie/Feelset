@@ -3,19 +3,25 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const { Client, GatewayIntentBits, ButtonBuilder, EmbedBuilder, ActionRowBuilder, AttachmentBuilder} = require('discord.js');
 
-export default async function discordHandling (job){
+export default async function discordHandling (job, data){
     const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
     client.once('ready', () => {
     
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
     client.login(process.env.TOKEN);
 
-    const audioFile = fs.readFileSync('/home/feelset/Feelset/pages/api/uploads/0767942b77f1f753b5f0acf07.mp3');
-    const song = new AttachmentBuilder(audioFile, {name: 'song.wav'});
+    let songNameBuild = data.songName + data.songPath.substring(data.songPath.length-4, data.songPath.length);
+
+    const audioFile = fs.readFileSync(data.songPath); 
+    const song = new AttachmentBuilder(audioFile, {name: songNameBuild});
     
     const embed = new EmbedBuilder()
-        .setTitle('Example Message')
-        .setDescription('New song who dis?')
+        .setTitle(data.artistName + " - " + data.songName)
+        .addFields({name: 'Id', value: JSON.stringify(data.id)},
+        )
+        .setTimestamp()
+        .setImage('https://i.stack.imgur.com/Fzh0w.png')
+        .setAuthor({ name: 'Song Submission', iconURL: 'https://cdn.discordapp.com/attachments/899845943275454487/1092900368544968845/feelset-circle.png', url: 'https://www.youtube.com/c/feelset' })
     const approveBtn = new ButtonBuilder()
         .setLabel('Approve')
         .setCustomId('approve')
@@ -26,6 +32,24 @@ export default async function discordHandling (job){
         .setStyle('Danger');
     const row = new ActionRowBuilder()
         .addComponents(approveBtn, denyBtn);
+
+        // arbitrary length tester
+        if(JSON.stringify(data.instagram).length > 5){
+            embed.addFields({name: 'Instagram', value: data.instagram});
+        }
+        if(JSON.stringify(data.twitter).length > 5){
+            embed.addFields({name: 'Twitter', value: data.twitter});
+        }
+        if(JSON.stringify(data.spotify).length > 5){
+            embed.addFields({name: 'Spotify', value: data.spotify});
+        }
+        if(JSON.stringify(data.soundcloud).length > 5){
+            embed.addFields({name: 'Soundcloud', value: data.soundcloud});
+        }
+        if(JSON.stringify(data.linktree).length > 5){
+            embed.addFields({name: 'Linktree', value: data.linktree});
+        }
+        
 
     channel.send({ embeds: [embed], components: [row], files: [song] });
     })

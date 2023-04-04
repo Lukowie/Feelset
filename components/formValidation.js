@@ -5,11 +5,13 @@ export default function testRegex (links) {
     let testArr = [];
     let flag = 0;
 
+
     validateLinktreeLink(links.spotify, testArr);
     validateSoundcloudLink(links.soundcloud, testArr);
     validateSpotifyLink(links.linktree, testArr);
     validateTwitterLink(links.twitter, testArr);
     validateInstagramLink(links.instagram, testArr);
+   
     
     for(let i =0; i <testArr.length; i++){
         let item = testArr[i];
