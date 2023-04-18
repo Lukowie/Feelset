@@ -6,10 +6,21 @@ const windowsComputerUsername = '<username of your Windows computer>';
 const windowsComputerPassword = '<password of your Windows computer>';
 
 const processJob = async (job, data) => {
+
     // Send Discord message to approval user
-    discordHandling(job, data);
-    // ...
+    let id = await discordHandling(data);
+    console.log(JSON.stringify(id));
+    //if (id.name === "approve"){
+    //    console.log("approved " + id.value);
+   // } else if (id.name === "deny"){
+    //    console.log("denied " + id.value);
+   // }
+
+    // copy files to client via winscp sftp
     // Execute PowerShell script on Windows computer
+    //  -> open after effects 
+    //  -> dynamically create the editing script
+    //  -> run the editing script
     // ...
     // Read specifications of the rendered file
    // const filePath = '/path/to/rendered/file.json';
@@ -19,7 +30,7 @@ const processJob = async (job, data) => {
 };
 
 export default async function handler(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     await processJob(req.body.id, req.body);
     res.status(200).end();
 }
